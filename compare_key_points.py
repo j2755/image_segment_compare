@@ -1,6 +1,7 @@
 
 import numpy as np
 import PIL
+from PIL import Image
 import math
 
 
@@ -26,4 +27,14 @@ def compare_array_dicts(set_of_dicts):
 		mean_of_values=[np.mean(list_of_aver)]*len(list_of_aver)
 		aver_dict.update({key:mean_squared_error(mean_of_values,list_of_aver)})
 	return(aver_dict)
+
+
+def convert_images_to_np_arrays(list_of_image_directories):
+	array_list=[]
+
+	for i in list_of_image_directories:
+		with Image.open(i).convert('LA') as im:
+		temp=np.asarray(im)
+		array_list.append(temp)
+	return array_list
 
